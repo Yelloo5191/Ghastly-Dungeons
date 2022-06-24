@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
 
@@ -47,4 +48,5 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(position);
     }
+
 }
