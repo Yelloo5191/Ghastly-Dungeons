@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAimWeapon : MonoBehaviour
 {
+     Rigidbody2D rb;
+     Vector3 aimDir;
+     public GameObject projectilePrefab;
 
     Transform aimTransform;
 
@@ -15,7 +18,7 @@ public class PlayerAimWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -23,22 +26,25 @@ public class PlayerAimWeapon : MonoBehaviour
     {
         HandleAiming();
         HandleShooting();
+ 
     }
-
     private void HandleAiming()
     {
         Vector3 mousePos = GetMouseWorldPosition();
 
-        Vector3 aimDir = (mousePos - transform.position).normalized;
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        aimTransform.eulerAngles = new Vector3(0, 0, angle);
+        
+        aimDir = (mousePos - transform.position).normalized; // Getting Direction of aim and normalizing it
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg; // angle of the wand or whateever tf that was
+        aimTransform.eulerAngles = new Vector3(0, 0, angle); // rotation of le wand
     }
 
     private void HandleShooting()
     {
         if (Input.GetMouseButtonDown(0))
         {
-           // fuck me
+        
+            Launch();
+
         }
     }
 
@@ -48,4 +54,14 @@ public class PlayerAimWeapon : MonoBehaviour
         mouseScreenPosition.z = 0f;
         return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
     }
+
+    void Launch()
+{
+    GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+
+    Projectile projectile = projectileObject.GetComponent<Projectile>();
+    projectile.Launch(aimDir, 300);
+
+    
+}
 }
