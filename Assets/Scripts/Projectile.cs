@@ -20,8 +20,12 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector2 direction, float force)
     {
-        Debug.Log(direction);
+        direction.Normalize();   
+        
         rigidbody2d.AddForce(direction * force);
+        
+        Debug.Log("direction:" + direction);
+        Debug.Log("force:" + force);
     }
 
     void OnCollisionEnter2D(Collision2D other)
