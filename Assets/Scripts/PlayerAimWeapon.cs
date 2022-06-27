@@ -26,13 +26,11 @@ public class PlayerAimWeapon : MonoBehaviour
     {
         HandleAiming();
         HandleShooting();
- 
     }
     private void HandleAiming()
     {
         Vector3 mousePos = GetMouseWorldPosition();
 
-        
         aimDir = (mousePos - transform.position).normalized; // Getting Direction of aim and normalizing it
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg; // angle of the wand or whateever tf that was
         aimTransform.eulerAngles = new Vector3(0, 0, angle); // rotation of le wand
@@ -42,9 +40,7 @@ public class PlayerAimWeapon : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-        
             Launch();
-
         }
     }
 
@@ -56,12 +52,10 @@ public class PlayerAimWeapon : MonoBehaviour
     }
 
     void Launch()
-{
-    GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
 
-    Projectile projectile = projectileObject.GetComponent<Projectile>();
-    projectile.Launch(aimDir, 300);
-
-    
-}
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(aimDir, 300);
+    }
 }

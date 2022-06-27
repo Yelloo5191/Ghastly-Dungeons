@@ -11,8 +11,6 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();    
-
-
     }
 
     // Update is called once per frame
@@ -20,16 +18,18 @@ public class Projectile : MonoBehaviour
     {
         
     }
+    
     public void Launch(Vector2 direction, float force)
-{
-    rigidbody2d.AddForce(direction * force);
-}
+    {
+        rigidbody2d.AddForce(direction * force);
+    }
+    
     void OnCollisionEnter2D(Collision2D other)
-{
-    //we also add a debug log to know what the projectile touch
-    Debug.Log("Projectile Collision with " + other.gameObject);
-    //Destroy(gameObject);
-}
+    {
+        //we also add a debug log to know what the projectile touch
+        Debug.Log("Projectile Collision with " + other.gameObject);
+        Destroy(gameObject);
+    }
 
 }
 

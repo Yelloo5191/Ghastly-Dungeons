@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2362818243684380341}
   - component: {fileID: 5907365411952350996}
   - component: {fileID: 6500321029152842108}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.03, y: 0.03}
+    oldSize: {x: 0.09375, y: 0.09375}
     newSize: {x: 0.03, y: 0.03}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
