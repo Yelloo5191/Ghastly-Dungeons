@@ -11,22 +11,11 @@ public class EnemyController : MonoBehaviour
 
     float timeBetweenAttacks = 2f;
     float attackTimer = 0f;
-    bool canAttack = true;
+    public bool canAttack = true;
 
     Animator animator;
 
     float health = 3;
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        PlayerController player = other.GetComponent<PlayerController>();
-
-        if (player != null && attacking)
-        {
-            // player.TakeDamage(1);
-            StopAttacking();
-        }
-    }
 
     void Start()
     {
@@ -36,14 +25,14 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(aiPath.desiredVelocity.x > 0.01f) 
-        // {
-        //     animator.SetFloat("Move X", .5f);
-        // }
-        // if(aiPath.desiredVelocity.x < -0.01f)
-        // {
-        //     animator.SetFloat("Move X", -.5f);
-        // }
+        if(aiPath.desiredVelocity.x > 0.01f) 
+        {
+            animator.SetFloat("Move X", .5f);
+        }
+        if(aiPath.desiredVelocity.x < -0.01f)
+        {
+            animator.SetFloat("Move X", -.5f);
+        }
         if(aiPath.desiredVelocity.y > 0.01f)
         {
             animator.SetFloat("Move Y", .5f);
@@ -54,11 +43,6 @@ public class EnemyController : MonoBehaviour
         }
 
 
-        if(aiPath.reachedEndOfPath && canAttack)
-        {
-            Attack();
-        }
-
         if (!canAttack) {
             attackTimer += Time.deltaTime;
             if (attackTimer >= timeBetweenAttacks) {
@@ -68,15 +52,31 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Attack()
+    public void Attack(PlayerController player)
     {
         attacking = true;
         canAttack = false;
         animator.SetTrigger("Attack");
+        player.TakeDamage(1);
+        StopAttacking();
     }
 
     void StopAttacking()
     {
         attacking = false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Die();
+        }
+    } 
+
+    void Die()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
-    float health = 3;
+    public float health = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +49,30 @@ public class PlayerController : MonoBehaviour
         position.y = position.y + speed * vertical * Time.fixedDeltaTime;
 
         rb.MovePosition(position);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Die();
+        }
+        Debug.Log("Health: " + health);
+    }
+
+    public void AddHealth(float addHealth)
+    {
+        if(!(health + addHealth > 3))
+        {
+            health += addHealth;
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died");
+        // change scenes to death scene
     }
 
 
