@@ -20,8 +20,7 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector2 direction, float force)
     {
-        direction.Normalize();   
-        
+        direction.Normalize();     
         rigidbody2d.AddForce(direction * force);
         
         // Debug.Log("direction:" + direction);
@@ -30,7 +29,6 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        // we also add a debug log to know what the projectile touch
         // Debug.Log("Projectile Collision with " + other.gameObject);
         Destroy(gameObject);
         if (other.gameObject.tag == "Enemy")
@@ -38,7 +36,6 @@ public class Projectile : MonoBehaviour
             other.gameObject.GetComponentInChildren<EnemyController>().TakeDamage(1);
         }
     }
-
 }
 
 
