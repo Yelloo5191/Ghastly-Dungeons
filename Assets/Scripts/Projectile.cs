@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
 
     Rigidbody2D rigidbody2d;
 
-    // Start is called before the first frame update
     void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();    
@@ -18,16 +17,17 @@ public class Projectile : MonoBehaviour
     {
         
     }
-    
+
     public void Launch(Vector2 direction, float force)
     {
+        Debug.Log(direction);
         rigidbody2d.AddForce(direction * force);
     }
-    
+
     void OnCollisionEnter2D(Collision2D other)
     {
-        //we also add a debug log to know what the projectile touch
-        Debug.Log("Projectile Collision with " + other.gameObject);
+        // we also add a debug log to know what the projectile touch
+        // Debug.Log("Projectile Collision with " + other.gameObject);
         Destroy(gameObject);
     }
 

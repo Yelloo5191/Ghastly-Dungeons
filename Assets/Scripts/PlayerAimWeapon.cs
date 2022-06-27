@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerAimWeapon : MonoBehaviour
 {
-     Rigidbody2D rb;
-     Vector3 aimDir;
-     public GameObject projectilePrefab;
+    Rigidbody2D rb;
+    Vector3 aimDir;
+    public GameObject projectilePrefab;
 
     Transform aimTransform;
 
@@ -18,7 +18,7 @@ public class PlayerAimWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -53,9 +53,9 @@ public class PlayerAimWeapon : MonoBehaviour
 
     void Launch()
     {
-        GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+        GameObject projectileObject = Instantiate(projectilePrefab, rb.position, Quaternion.identity);
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(aimDir, 300);
+        projectile.Launch(aimDir.normalized, 600);
     }
 }

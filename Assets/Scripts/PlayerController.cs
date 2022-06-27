@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
+    float health = 3;
+
     // Start is called before the first frame update
     void Start()
     {

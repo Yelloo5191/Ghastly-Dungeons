@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyGFX : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public AIPath aiPath;
 
@@ -14,6 +14,8 @@ public class EnemyGFX : MonoBehaviour
     bool canAttack = true;
 
     Animator animator;
+
+    float health = 3;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -34,22 +36,23 @@ public class EnemyGFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(aiPath.desiredVelocity.x > 0.01f) 
+        // if(aiPath.desiredVelocity.x > 0.01f) 
+        // {
+        //     animator.SetFloat("Move X", .5f);
+        // }
+        // if(aiPath.desiredVelocity.x < -0.01f)
+        // {
+        //     animator.SetFloat("Move X", -.5f);
+        // }
+        if(aiPath.desiredVelocity.y > 0.01f)
         {
-            animator.SetFloat("Move X", 1);
+            animator.SetFloat("Move Y", .5f);
         }
-        else if(aiPath.desiredVelocity.x < -0.01f)
+        if(aiPath.desiredVelocity.y < -0.01f)
         {
-            animator.SetFloat("Move X", -1);
+            animator.SetFloat("Move Y", -.5f);
         }
-        else if(aiPath.desiredVelocity.y > 0.01f)
-        {
-            animator.SetFloat("Move Y", 1);
-        }
-        else if(aiPath.desiredVelocity.y < -0.01f)
-        {
-            animator.SetFloat("Move Y", -1);
-        }
+
 
         if(aiPath.reachedEndOfPath && canAttack)
         {
