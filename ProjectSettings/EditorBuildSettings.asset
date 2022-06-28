@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level5.unity
     guid: 408552fe53efdbc40b4a8b61b61d13bc
+  - enabled: 1
+    path: Assets/Scenes/Death.unity
+    guid: 8c87843f0e340444db8da74295a530b1
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2188ebf4e487a68438edc0e851a9ae21, type: 2}

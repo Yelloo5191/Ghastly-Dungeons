@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadNextLevel());
     }
 
+    public void DeathScreen()
+    {
+        SceneManager.LoadScene(7);
+    }
+
     // load nextlevel couroutine
     IEnumerator LoadNextLevel()
     {

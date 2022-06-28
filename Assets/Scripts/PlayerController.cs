@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
 
+    GameManager gameManager;
+
     Rigidbody2D rb;
     public float speed = 3.0f;
     float horizontal;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died");
-        // change scenes to death scene
+        gameManager.DeathScreen();
     }
 
 

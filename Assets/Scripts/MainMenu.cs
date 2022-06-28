@@ -20,13 +20,18 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         // change the scene that is being loaded from + 1 in the queue to a specific scene when conveniant
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
 
     public void Quit()
     {
         Application.Quit();
         Debug.Log("Quit");
+    }
+
+    public void Return()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
