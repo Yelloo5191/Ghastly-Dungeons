@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     public AIPath aiPath;
 
-    bool attacking = false;
+    GameManager gameManager;
+
 
     float timeBetweenAttacks = 2f;
     float attackTimer = 0f;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -54,17 +56,11 @@ public class EnemyController : MonoBehaviour
 
     public void Attack(PlayerController player)
     {
-        attacking = true;
         canAttack = false;
         animator.SetTrigger("Attack");
         player.TakeDamage(1);
-        StopAttacking();
     }
 
-    void StopAttacking()
-    {
-        attacking = false;
-    }
 
     public void TakeDamage(float damage)
     {
@@ -77,6 +73,36 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
+        for (int i = 0; i < gameManager.enemies.Length; i++)
+        {
+            if (gameManager.enemies[i] == gameObject.transform.parent.gameObject)
+            {
+                gameManager.enemies[i] = null;
+            }
+        }
+
+        bool allDead = true;
+        // set one inactive enemy in the list to be the new active enemy
+        for (int i = 0; i < gameManager.enemies.Length; i++)
+        {
+            if (gameManager.enemies[i] != null)
+            {
+                allDead = false;
+                if (!gameManager.enemies[i].activeSelf) {
+                    Debug.Log("Enemy: " + gameManager.enemies[i] + " Active: " + gameManager.enemies[i].activeSelf);
+                    gameManager.enemies[i].SetActive(true);
+                    break;
+                }
+            }
+        }
+
+        // if no enemies in the list are active, go to the next level
+        if (allDead)
+        {
+            gameManager.NextLevel();
+        }
+
+
         Destroy(gameObject.transform.parent.gameObject);
     }
 }
